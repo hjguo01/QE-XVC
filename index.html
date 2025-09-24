@@ -1,361 +1,229 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-        }
-
-        h1,
-        h2 {
-            text-align: left;
-        }
-
-        .author-info {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .abstract {
-            max-width: 800px;
-            margin: 0 auto 40px;
-            text-align: justify;
-            line-height: 1.6;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-
-        .table-container {
-            margin-bottom: 60px;
-            margin: auto;
-
-
-
-
-        }
-
-        table {
-            width: 100%;
-            border-collapse: separate;
-            table-layout: fixed;
-            margin-top: 10px;
-
-        }
-
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        .audio-container {
-            display: flex;
-            justify-content: normal;
-            margin-bottom: 10px;
-        }
-
-        .audio-container label {
-            display: block;
-            text-align: center;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .audio-block {
-            width: 15%;
-            text-align: center;
-        }
-
-        audio {
-            width: 100%;
-        }
-    </style>
+    <title>QE-XVC Demo Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <div class="max-w-5xl mx-auto p-6">
+        <!-- Title -->
+        <h1 class="text-3xl font-bold text-center mb-4">QE-XVC: Zero-shot Cross-lingual Voice Conversion via
+            Query-Enhancement and Conditional Flow Matching</h1>
 
-    <h1>QE-XVC: Zero-Shot Cross-Lingual Voice Conversion via Query-Enhancement and Conditional Flow Matching</h1>
-
-    <div class="author-info">
-        <p><b>Han-Jie Guo, Hui-Peng Du, Shi-Ming Wang, Xiao-Hang Jiang, Ying-Ying Gao, Shi-Lei Zhang, Zhen-Hua Ling*</b></p>
-        <p>National Engineering Research Center of Speech and Language Information Processing,<br>University of Science
-            and Technology of China, Hefei, P.R.China</p>
-        <p>Jiutian Artificial Intelligence Research Institute, China Mobile</p>
-<!--         <p>{<a href="mailto:ghj2001@mail.ustc.edu.cn">ghj2001</a>,<a href="mailto:redmist@mail.ustc.edu.cn">redmist</a>,
-            <a href="mailto:zysheng@mail.ustc.edu.cn">zysheng</a>}@mail.ustc.edu.cn
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<a href="mailto:lipchen@ustc.edu.cn">lipchen</a>,<a
-                href="mailto:yangai@ustc.edu.cn">yangai</a>,<a href="mailto:zhling@ustc.edu.cn">zhling</a>}@ustc.edu.cn
-        </p> -->
-    </div>
-
-    <div class="abstract">
-        <h3>Abstract</h3>
-        <p>Voice conversion (VC) aims to modify the speaker identity of speech while preserving its linguistic content. Cross-lingual voice conversion (XVC) further enables converting speech between speakers of different languages. Existing zero-shot XVC methods often struggle with pronunciation errors, insufficient speaker modeling or the difficulty of aligning source and target across languages. In this paper, we propose QE-XVC, an efficient zero-shot XVC method with query-enhancement and conditional flow matching (CFM). Specifically, we designed a query-enhancement module in which the speaker embeddings from an speaker verification (SV) model and the content representation are successively used as queries to enhance the frame-level speaker representations extracted by wavelet convolutions. The CFM model then generates converted acoustic features conditioned on both the content and the fine-grained speaker representations, which are subsequently transformed into waveforms by a vocoder. Experimental results demonstrate that, QE-XVC reduces potential pronunciation errors without introducing any quantization or clustering operations, while also improving prosody preservation from the source speaker.</p>
-    </div>
-<!-- 
-    <div class="table-container">
-        <h2>English to Chinese</h2>
-        <div class="audio-container">
-            <!-- <div class="audio-block">
-                <label>Source: p246</label>
-                <audio controls>
-                    <source src="demo/src/p246_119.wav" type="audio/wav">
-                    您的浏览器不支持音频播放。
-                </audio>
-            </div> -->
-            <div class="audio-block">
-                <label>Target: S0005</label>
-                <audio controls>
-                    <source src="demo/tar/BAC009S0005W0121.wav" type="audio/wav">
-                    您的浏览器不支持音频播放。
-                </audio>
-            </div>
+        <!-- Author info -->
+        <div class="text-center mb-8">
+            <p class="text-lg">Han-Jie Guo<sup>1</sup>, Hui-Peng Du<sup>1</sup>, Shi-Ming Wang<sup>1</sup>, Xiao-Hang
+                Jiang<sup>1</sup>,
+                Ying-Ying Gao<sup>2</sup>, Shi-Lei Zhang<sup>2</sup>, Zhen-Hua Ling<sup>1*</sup></p>
+            <p class="text-md"><sup>1</sup>National Engineering Research Center of Speech and Language Information
+                Processing,
+                University of Science and Technology of China, Hefei, P.R.China<br>
+                <sup>2</sup>Jiutian Artificial Intelligence Research Institute, China Mobile
+            </p>
+            <p class="text-md">Contact: <a href="mailto:ghj2001@mail.ustc.edu.cn"
+                    class="text-blue-600">ghj2001@mail.ustc.edu.cn</a></p>
         </div>
+        <!-- Prosody comparison figure -->
+        <div class="mb-12">
+            <h2 class="text-xl font-semibold text-center mb-4">Architecture</h2>
+            <img src="figure 3.png" alt="Architecture" class="rounded-xl shadow-md mx-auto max-w-3xl w-full h-auto">
+        </div>
+
+        <!-- Abstract -->
+        <div class="bg-white shadow-md rounded-xl p-6 mb-10">
+            <h2 class="text-xl font-semibold mb-2">Abstract</h2>
+            <p class="text-justify">
+                Voice conversion (VC) aims to modify the speaker identity of speech
+                while preserving its linguistic content. Cross-lingual voice conversion
+                (XVC) further enables converting speech between speakers of
+                different languages. Existing zero-shot XVC methods often struggle
+                with pronunciation errors, insufficient speaker modeling or the
+                difficulty of aligning source and target across languages. In this
+                paper, we propose <b>QE-XVC</b>, an efficient zero-shot XVC method
+                with query-enhancement and conditional flow matching (CFM).
+                Specifically, we designed a query-enhancement module in which the
+                speaker embeddings from an speaker verification (SV) model and
+                the content representation are successively used as queries to enhance
+                the frame-level speaker representations extracted by wavelet
+                convolutions. The CFM model then generates converted acoustic
+                features conditioned on both the content and the fine-grained
+                speaker representations, which are subsequently transformed into
+                waveforms by a vocoder. Experimental results demonstrate that,
+                QE-XVC reduces potential pronunciation errors without introducing
+                any quantization or clustering operations, while also improving
+                prosody preservation from the source speaker.
+            </p>
+        </div>
+
+
+        <!-- Prosody comparison figure -->
+        <div class="mb-12">
+            <h2 class="text-xl font-semibold text-center mb-4">Prosody Comparison</h2>
+            <img src="f0.png" alt="Prosody Comparison" class="rounded-xl shadow-md mx-auto max-w-3xl w-full h-auto">
+        </div>
+
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+                margin-bottom: 30px;
+                /* 表格之间留点空间 */
+            }
+
+            caption {
+                caption-side: top;
+                font-size: 1.2em;
+                font-weight: bold;
+                padding: 8px;
+                color: #333;
+                background-color: #f9f9f9;
+                border: 1px solid #ddd;
+            }
+
+            th,
+            td {
+                border: 1px solid #ddd;
+                padding: 4px;
+                text-align: center;
+                vertical-align: middle;
+                word-wrap: break-word;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            audio {
+                width: 90%;
+                height: 28px;
+                display: block;
+
+            }
+        </style>
+
         <table>
+            <caption>English → Spanish</caption>
             <tr>
-                <th>Source: p246</th>
-                <th>CyclePPG-XVC</th>
-                <th>YourTTS</th>
-                <th>AutoCycle-VC</th>
-                <th><b>CASC-XVC (ours)</b></th>
+                <th>Source</th>
+                <th>Target</th>
+                <th>QE-XVC</th>
+                <th>Diff-HierVC</th>
+                <th>RefXVC</th>
+                <th>vec2wav 2.0</th>
             </tr>
             <tr>
-                <td><audio controls>
-                        <source src="demo/src/p246_119.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/en2ch/CyclePPG-VC/p246_119-S0005_generated_e2e.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/en2ch/Yourtts/p246_119-BAC009S0005W0121.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/en2ch/Autocycle-VC/p246_119xS0005_generated_e2e.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/en2ch/proposed/p246_119-BAC009S0005W0121.wav" type="audio/wav">
-                    </audio></td>
+                <td><audio controls src="demo/en_src/3729_6852_000040_000002.wav"></audio></td>
+                <td><audio controls src="demo/sp_tgt/8585_7405_000035.flac"></audio></td>
+                <td><audio controls src="demo/en2sp/proposed/3729_6852_000040_000002-8585_7405_000035.wav"></audio></td>
+                <td><audio controls src="demo/en2sp/Diff-HierVC/3729_6852_000040_000002-8585_7405_000035.wav"></audio>
+                </td>
+                <td><audio controls src="demo/en2sp/RefXVC/3729_6852_000040_000002-8585_7405_000035.wav"></audio></td>
+                <td><audio controls src="demo/en2sp/vec2wav 2.0/3729_6852_000040_000002-8585_7405_000035.wav"></audio>
+                </td>
             </tr>
             <tr>
-                <td><audio controls>
-                        <source src="demo/src/p246_278.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/en2ch/CyclePPG-VC/p246_278-S0005_generated_e2e.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/en2ch/Yourtts/p246_278-BAC009S0005W0121.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/en2ch/Autocycle-VC/p246_278xS0005_generated_e2e.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/en2ch/proposed/p246_278-BAC009S0005W0121.wav" type="audio/wav">
-                    </audio></td>
+                <td><audio controls src="demo/en_src/5639_40744_000015_000003.wav"></audio></td>
+                <td><audio controls src="demo/sp_tgt/8585_7405_000035.flac"></audio></td>
+                <td><audio controls src="demo/en2sp/proposed/5639_40744_000015_000003-8585_7405_000035.wav"></audio>
+                </td>
+                <td><audio controls src="demo/en2sp/Diff-HierVC/5639_40744_000015_000003-8585_7405_000035.wav"></audio>
+                </td>
+                <td><audio controls src="demo/en2sp/RefXVC/5639_40744_000015_000003-8585_7405_000035.wav"></audio></td>
+                <td><audio controls src="demo/en2sp/vec2wav 2.0/5639_40744_000015_000003-8585_7405_000035.wav"></audio>
+                </td>
+            </tr>
+            <tr>
+                <td><audio controls src="demo/en_src/7176_92135_000031_000003.wav"></audio></td>
+                <td><audio controls src="demo/sp_tgt/7510_9951_000005.wav"></audio></td>
+                <td><audio controls src="demo/en2sp/proposed/7176_92135_000031_000003-7510_9951_000005.wav"></audio>
+                </td>
+                <td><audio controls src="demo/en2sp/Diff-HierVC/7176_92135_000031_000003-7510_9951_000005.wav"></audio>
+                </td>
+                <td><audio controls src="demo/en2sp/RefXVC/7176_92135_000031_000003-7510_9951_000005.wav"></audio></td>
+                <td><audio controls src="demo/en2sp/vec2wav 2.0/7176_92135_000031_000003-7510_9951_000005.wav"></audio>
+                </td>
+            </tr>
+            <tr>
+                <td><audio controls src="demo/en_src/8555_284447_000049_000001.wav"></audio></td>
+                <td><audio controls src="demo/sp_tgt/7510_9951_000005.wav"></audio></td>
+                <td><audio controls src="demo/en2sp/proposed/8555_284447_000049_000001-7510_9951_000005.wav"></audio>
+                </td>
+                <td><audio controls src="demo/en2sp/Diff-HierVC/8555_284447_000049_000001-7510_9951_000005.wav"></audio>
+                </td>
+                <td><audio controls src="demo/en2sp/RefXVC/8555_284447_000049_000001-7510_9951_000005.wav"></audio></td>
+                <td><audio controls src="demo/en2sp/vec2wav 2.0/8555_284447_000049_000001-7510_9951_000005.wav"></audio>
+                </td>
+            </tr>
+
+        </table>
+
+        <table>
+            <caption>Spanish → English</caption>
+            <tr>
+                <th>Source</th>
+                <th>Target</th>
+                <th>QE-XVC</th>
+                <th>Diff-HierVC</th>
+                <th>RefXVC</th>
+                <th>vec2wav 2.0</th>
+            </tr>
+            <tr>
+                <td><audio controls src="demo/sp_src/12525_11991_000044.flac"></audio></td>
+                <td><audio controls src="demo/en_tgt/7127_75946_000040_000010.wav"></audio></td>
+                <td><audio controls src="demo/sp2en/proposed/12525_11991_000044-7127_75946_000040_000010.wav"></audio>
+                </td>
+                <td><audio controls
+                        src="demo/sp2en/Diff-HierVC/12525_11991_000044-7127_75946_000040_000010.wav"></audio></td>
+                <td><audio controls src="demo/sp2en/RefXVC/12525_11991_000044-7127_75946_000040_000010.wav"></audio>
+                </td>
+                <td><audio controls
+                        src="demo/sp2en/vec2wav 2.0/12525_11991_000044-7127_75946_000040_000010.wav"></audio></td>
+            </tr>
+            <tr>
+                <td><audio controls src="demo/sp_src/3471_1378_000139.flac"></audio></td>
+                <td><audio controls src="demo/en_tgt/7127_75946_000040_000010.wav"></audio></td>
+                <td><audio controls src="demo/sp2en/proposed/3471_1378_000139-7127_75946_000040_000010.wav"></audio>
+                </td>
+                <td><audio controls src="demo/sp2en/Diff-HierVC/3471_1378_000139-7127_75946_000040_000010.wav"></audio>
+                </td>
+                <td><audio controls src="demo/sp2en/RefXVC/3471_1378_000139-7127_75946_000040_000010.wav"></audio></td>
+                <td><audio controls src="demo/sp2en/vec2wav 2.0/3471_1378_000139-7127_75946_000040_000010.wav"></audio>
+                </td>
+            </tr>
+            <tr>
+                <td><audio controls src="demo/sp_src/7678_7613_000074.flac"></audio></td>
+                <td><audio controls src="demo/en_tgt/1995_1826_000046_000001.wav"></audio></td>
+                <td><audio controls src="demo/sp2en/proposed/7678_7613_000074-1995_1826_000046_000001.wav"></audio></td>
+                <td><audio controls src="demo/sp2en/Diff-HierVC/7678_7613_000074-1995_1826_000046_000001.wav"></audio>
+                </td>
+                <td><audio controls src="demo/sp2en/RefXVC/7678_7613_000074-1995_1826_000046_000001.wav"></audio></td>
+                <td><audio controls src="demo/sp2en/vec2wav 2.0/7678_7613_000074-1995_1826_000046_000001.wav"></audio>
+                </td>
+            </tr>
+            <tr>
+                <td><audio controls src="demo/sp_src/4747_2162_000070.flac"></audio></td>
+                <td><audio controls src="demo/en_tgt/1995_1826_000046_000001.wav"></audio></td>
+                <td><audio controls src="demo/sp2en/proposed/4747_2162_000070-1995_1826_000046_000001.wav"></audio></td>
+                <td><audio controls src="demo/sp2en/Diff-HierVC/4747_2162_000070-1995_1826_000046_000001.wav"></audio>
+                </td>
+                <td><audio controls src="demo/sp2en/RefXVC/4747_2162_000070-1995_1826_000046_000001.wav"></audio></td>
+                <td><audio controls src="demo/sp2en/vec2wav 2.0/4747_2162_000070-1995_1826_000046_000001.wav"></audio>
+                </td>
             </tr>
         </table>
+
+
+
+
+
+
+
+
     </div>
-
-    <div class="table-container">
-        <h2>Chinese to English</h2>
-        <div class="audio-container">
-            <!-- <div class="audio-block">
-                        <label>Source: p246</label>
-                        <audio controls>
-                            <source src="demo/src/p246_119.wav" type="audio/wav">
-                            您的浏览器不支持音频播放。
-                        </audio>
-                    </div> -->
-            <div class="audio-block">
-                <label>Target: p272</label>
-                <audio controls>
-                    <source src="demo/tar/p272_003.wav" type="audio/wav">
-                    您的浏览器不支持音频播放。
-                </audio>
-            </div>
-        </div>
-        <table>
-            <tr>
-                <th>Source: S0660</th>
-                <th>CyclePPG-XVC</th>
-                <th>YourTTS</th>
-                <th>AutoCycle-VC</th>
-                <th><b>CASC-XVC (ours)</b></th>
-            </tr>
-            <tr>
-                <td><audio controls>
-                        <source src="demo/src/BAC009S0660W0178.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/ch2en/CyclePPG-VC/BAC009S0660W0178-p272_generated_e2e.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/ch2en/Yourtts/BAC009S0660W0178-p272_003.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/ch2en/Autocycle-VC/BAC009S0660W0178xp272_generated_e2e.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/ch2en/proposed/BAC009S0660W0178-p272_003.wav" type="audio/wav">
-                    </audio></td>
-            </tr>
-            <tr>
-                <td><audio controls>
-                        <source src="demo/src/BAC009S0660W0339.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/ch2en/CyclePPG-VC/BAC009S0660W0339-p272_generated_e2e.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/ch2en/Yourtts/BAC009S0660W0339-p272_003.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/ch2en/Autocycle-VC/BAC009S0660W0339xp272_generated_e2e.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/ch2en/proposed/BAC009S0660W0339-p272_003.wav" type="audio/wav">
-                    </audio></td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="table-container">
-        <h2>English to English</h2>
-        <div class="audio-container">
-            <!-- <div class="audio-block">
-                        <label>Source: p246</label>
-                        <audio controls>
-                            <source src="demo/src/p246_119.wav" type="audio/wav">
-                            您的浏览器不支持音频播放。
-                        </audio>
-                    </div> -->
-            <div class="audio-block">
-                <label>Target: p225</label>
-                <audio controls>
-                    <source src="demo/tar/p225_002.wav" type="audio/wav">
-                    您的浏览器不支持音频播放。
-                </audio>
-            </div>
-        </div>
-        <table>
-            <tr>
-                <th>Source: p233</th>
-                <th>CyclePPG-XVC</th>
-                <th>YourTTS</th>
-                <th>AutoCycle-VC</th>
-                <th><b>CASC-XVC (ours)</b></th>
-            </tr>
-            <tr>
-                <td><audio controls>
-                        <source src="demo/src/p233_021.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/en2en/CyclePPG-VC/p233_021-p225_generated_e2e.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/en2en/Yourtts/p233_021-p225_003.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/en2en/Autocycle-VC/p233_021xp225_generated_e2e.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/en2en/proposed/p233_021-p225_003.wav" type="audio/wav">
-                    </audio></td>
-            </tr>
-            <tr>
-                <td><audio controls>
-                        <source src="demo/src/p233_053.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/en2en/CyclePPG-VC/p233_053-p225_generated_e2e.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/en2en/Yourtts/p233_053-p225_003.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/en2en/Autocycle-VC/p233_053xp225_generated_e2e.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/en2en/proposed/p233_053-p225_003.wav" type="audio/wav">
-                    </audio></td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="table-container">
-        <h2>Chinese to Chinese</h2>
-        <div class="audio-container">
-            <!-- <div class="audio-block">
-                        <label>Source: p246</label>
-                        <audio controls>
-                            <source src="demo/src/p246_119.wav" type="audio/wav">
-                            您的浏览器不支持音频播放。
-                        </audio>
-                    </div> -->
-            <div class="audio-block">
-                <label>Target: S0126</label>
-                <audio controls>
-                    <source src="demo/tar/BAC009S0126W0124.wav" type="audio/wav">
-                    您的浏览器不支持音频播放。
-                </audio>
-            </div>
-        </div>
-        <table>
-            <tr>
-                <th>Source: S0019</th>
-                <th>CyclePPG-XVC</th>
-                <th>YourTTS</th>
-                <th>AutoCycle-VC</th>
-                <th><b>CASC-XVC (ours)</b></th>
-            </tr>
-            <tr>
-                <td><audio controls>
-                        <source src="demo/src/BAC009S0019W0121.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/ch2ch/CyclePPG-VC/BAC009S0019W0121-S0126_generated_e2e.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/ch2ch/Yourtts/BAC009S0019W0121-BAC009S0126W0121.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/ch2ch/Autocycle-VC/BAC009S0019W0121xS0126_generated_e2e.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/ch2ch/proposed/BAC009S0019W0121-BAC009S0126W0121.wav" type="audio/wav">
-                    </audio></td>
-            </tr>
-            <tr>
-                <td><audio controls>
-                        <source src="demo/src/BAC009S0019W0395.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/ch2ch/CyclePPG-VC/BAC009S0019W0395-S0126_generated_e2e.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/ch2ch/Yourtts/BAC009S0019W0395-BAC009S0126W0121.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/ch2ch/Autocycle-VC/BAC009S0019W0395xS0126_generated_e2e.wav" type="audio/wav">
-                    </audio></td>
-                <td><audio controls>
-                        <source src="demo/ch2ch/proposed/BAC009S0019W0395-BAC009S0126W0121.wav" type="audio/wav">
-                    </audio></td>
-            </tr>
-        </table>
-    </div> -->
-
 </body>
 
 </html>
